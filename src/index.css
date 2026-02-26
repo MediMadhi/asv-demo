@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* ヘッダー：コンパクト */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.1rem;
+}
+
+.subtitle {
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+/* メインエリア：ビジュアライザー中央配置 */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.visualizer-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* コントロールパネル（レガシー - インラインスタイルに移行済み） */
+.controls {
+  /* スタイルはApp.tsx内でインライン指定 */
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.control-group label {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+/* ボタン：コンパクト */
+.state-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.state-button:hover {
+  opacity: 0.8;
+}
+
+.toggle-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:hover {
+  opacity: 0.8;
+}
+
+/* コントロール行 */
+.controls-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.controls-row .control-group {
+  min-width: unset;
+}
+
+/* スライダー：コンパクト */
+.slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #333;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid #333;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid #333;
+}
+
+/* 再生コントロール */
+.playback-controls {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.control-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+.control-button:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.play-button {
+  width: 32px;
+  height: 32px;
+  font-size: 0.8rem;
+  border: none !important;
+}
+
+/* シークバー */
+.seek-control {
+  flex: 1;
+  min-width: 100px;
+  max-width: 180px;
+}
+
+.seek-control label {
+  font-size: 0.5rem !important;
+}
+
+/* ステータス表示 */
+.status-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status-item {
+  font-size: 0.55rem;
+  opacity: 0.7;
+}
+
+/* フッター非表示 */
+.footer {
+  display: none;
+}
+
+/* ====================
+   PC向け（768px以上）
+   ==================== */
+@media (min-width: 768px) {
+  .header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.1rem;
+  }
+
+  .controls {
+    max-width: 400px;
+    padding: 0.75rem;
+    gap: 0.6rem;
+  }
+
+  .state-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.65rem;
+  }
+
+  .seek-control {
+    max-width: 200px;
+  }
+}
+
+/* ====================
+   大画面PC（1200px以上）
+   ==================== */
+@media (min-width: 1200px) {
+  .controls {
+    max-width: 450px;
+  }
+
+  .seek-control {
+    max-width: 240px;
+  }
+}
+
+/* ====================
+   モバイル（600px以下）
+   ==================== */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 0.9rem;
+  }
+
+  .subtitle {
+    font-size: 0.55rem;
+  }
+
+  .controls {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    max-width: none;
+    padding: 0.5rem;
+  }
+
+  .state-button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.55rem;
+  }
+
+  .toggle-button {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .control-button {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+
+  .play-button {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ====================
+   モバイル・タブレット（768px以下）
+   ==================== */
+@media (max-width: 768px) {
+  .main {
+    /* 中央配置ではなく上寄せにしてヘッダーとの距離を詰める */
+    align-items: flex-start;
+    /* ヘッダーの高さ分 + 少しの余白 */
+    padding-top: 3.5rem;
+  }
+}
