@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "sessionId": "demo_1",
+    "startedAt": "2026-06-19T00:49:26.851Z",
+    "endedAt": "2026-06-19T00:51:37.042Z",
+    "duration": 130191,
+    "name": "demo_1",
+    "description": "Recorded on 2026/06/19"
+  },
+  "entries": [
+    {
+      "timestamp": 0,
+      "type": "stateChange",
+      "state": "processing"
+    },
+    {
+      "timestamp": 240,
+      "type": "userTranscript",
+      "text": "おはようございます。",
+      "isFinal": true
+    },
+    {
+      "timestamp": 942,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "お"
+    },
+    {
+      "timestamp": 954,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "は"
+    },
+    {
+      "timestamp": 957,
+      "type": "stateChange",
+      "state": "speaking",
+      "previousState": "processing"
+    },
+    {
+      "timestamp": 966,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "よう"
+    },
+    {
+      "timestamp": 970,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "ございます"
+    },
+    {
+      "timestamp": 987,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "。"
+    },
+    {
+      "timestamp": 1300,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "今日"
+    },
+    {
+      "timestamp": 1304,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "も"
+    },
+    {
+      "timestamp": 1316,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "一"
+    },
+    {
+      "timestamp": 1323,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "日"
+    },
+    {
+      "timestamp": 1504,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "頑"
+    },
+    {
+      "timestamp": 1505,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "張"
+    },
+    {
+      "timestamp": 1516,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "り"
+    },
+    {
+      "timestamp": 1524,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "ま"
+    },
+    {
+      "timestamp": 1540,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "しょう"
+    },
+    {
+      "timestamp": 1545,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "！"
+    },
+    {
+      "timestamp": 1561,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "何"
+    },
+    {
+      "timestamp": 1862,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "か"
+    },
+    {
+      "timestamp": 1872,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "お"
+    },
+    {
+      "timestamp": 1887,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "手"
+    },
+    {
+      "timestamp": 1890,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "伝"
+    },
+    {
+      "timestamp": 1899,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "い"
+    },
+    {
+      "timestamp": 1906,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "でき"
+    },
+    {
+      "timestamp": 1917,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "る"
+    },
+    {
+      "timestamp": 1929,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "こと"
+    },
+    {
+      "timestamp": 1939,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "が"
+    },
+    {
+      "timestamp": 1944,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "あ"
+    },
+    {
+      "timestamp": 1953,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "れば"
+    },
+    {
+      "timestamp": 1967,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "、"
+    },
+    {
+      "timestamp": 1970,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "遠"
+    },
+    {
+      "timestamp": 2000,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "慮"
+    },
+    {
+      "timestamp": 2000,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "なく"
+    },
+    {
+      "timestamp": 2427,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "言"
+    },
+    {
+      "timestamp": 2439,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "って"
+    },
+    {
+      "timestamp": 2442,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "ください"
+    },
+    {
+      "timestamp": 2453,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "ね"
+    },
+    {
+      "timestamp": 2458,
+      "type": "aiTranscript",
+      "text": "",
+      "delta": "。"
+    },
+    {
+      "timestamp": 2890,
+      "type": "aiTranscript",
+      "text": "おはようございます。今日も一日頑張りましょう！何かお手伝いできることがあれば、遠慮なく言ってくださいね。"
+    },
+    {
+      "timestamp": 9602,
+      "type": "stateChange",
+      "state": "listening",
+      "previousState": "speaking"
+    },
+    {
+      "timestamp": 11194,
+      "type": "stateChange",
+      "state": "idle",
+      "previousState": "listening"
+    }
+  ]
+}
