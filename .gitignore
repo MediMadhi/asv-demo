@@ -2,3 +2,15 @@ node_modules
 dist
 *.tsbuildinfo
 .DS_Store
+
+# Unity generated files
+unity/*/Library/
+unity/*/Temp/
+unity/*/Logs/
+unity/*/UserSettings/
+unity/*/obj/
+unity/*/Build/
+unity/*/Builds/
+unity/*/*.csproj
+unity/*/*.sln
+unity-*.log

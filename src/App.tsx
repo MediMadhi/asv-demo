@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ParticleVisualizerWeb, FloatingParticlesVisualizer, StreamingTextVisualizer } from './visualizer';
+import { ParticleVisualizerWeb, FloatingParticlesVisualizer, StreamingTextVisualizer, UnityWebGLFrame } from './visualizer';
 import type { VisualizerState } from './visualizer';
 import { usePlayback } from './playback';
 import type { LoggedState } from './playback';
@@ -24,7 +24,7 @@ const toVisualizerState = (state: LoggedState): VisualizerState => {
 };
 
 type ThemeMode = 'system' | 'light' | 'dark';
-type VisualizerType = 'particle' | 'floating' | 'text' | 'waveform' | 'minimal';
+type VisualizerType = 'particle' | 'floating' | 'text' | 'unity' | 'waveform' | 'minimal';
 
 // ビジュアライザー情報
 interface VisualizerInfo {
@@ -39,6 +39,7 @@ const VISUALIZERS: VisualizerInfo[] = [
   { id: 'particle', name: 'Orbital Particles', description: 'Particles orbiting in circular formation (40 particles)', available: true, particleCount: 40 },
   { id: 'floating', name: 'Circular Particle Field', description: 'Rich floating particles with dispersion (500 particles)', available: true, particleCount: 500 },
   { id: 'text', name: 'Streaming Text', description: 'Dynamic text visualization with audio reactivity', available: true },
+  { id: 'unity', name: 'Unity WebGL', description: 'Embedded Unity WebGL demo scene', available: true },
   { id: 'waveform', name: 'Waveform', description: 'Audio waveform bars', available: false },
   { id: 'minimal', name: 'Minimal', description: 'Simple dot indicator', available: false },
 ];
@@ -758,6 +759,18 @@ function App() {
               width={dimensions.width}
               height={dimensions.height}
               color={particleColor}
+            />
+          )}
+          {selectedVisualizer === 'unity' && (
+            <UnityWebGLFrame
+              width={dimensions.width}
+              height={dimensions.height}
+              color={particleColor}
+              backgroundColor={backgroundColor}
+              audioLevel={currentAudioLevel}
+              zcr={currentZcr}
+              rmsHigh={currentRmsHigh}
+              state={currentState}
             />
           )}
           {selectedVisualizer === 'waveform' && (
