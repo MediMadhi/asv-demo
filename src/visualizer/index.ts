@@ -7,6 +7,7 @@ export { ParticleVisualizerWeb } from './ParticleVisualizerWeb';
 export { FloatingParticlesVisualizer } from './FloatingParticlesVisualizer';
 export { StreamingTextVisualizer } from './StreamingTextVisualizer';
 export { UnityWebGLFrame } from './UnityWebGLFrame';
+export { FaceAvatarVisualizer } from './FaceAvatarVisualizer';
 
 // Core
 export * from './core/types';
