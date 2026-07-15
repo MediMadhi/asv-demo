@@ -1,7 +1,7 @@
 /**
  * Face Avatar Visualizer (Web / three.js)
  *
- * olumo の Filament ASV と同じ face.glb（バスト型・unlit・頂点カラー＋モーフ
+ * Orqest の Filament ASV と同じ face.glb（バスト型・unlit・頂点カラー＋モーフ
  * Fcl_MTH_A/I/U/E/O・Fcl_EYE_Close）を three.js で描画し、rms＋state で口パク駆動する。
  * 口パクは自己完結（rms で口の開き、state=speaking 中に母音を切替）。
  */
@@ -83,7 +83,7 @@ export const FaceAvatarVisualizer: React.FC<FaceAvatarVisualizerProps> = ({
         }
       });
 
-      // 顔寄せカメラ（olumo の camDistMul=1.6 / camTargetFrac=0.35 を踏襲）。
+      // 顔寄せカメラ（Orqest の camDistMul=1.6 / camTargetFrac=0.35 を踏襲）。
       // Blender 顔前面 -Y は glTF(yup) で +Z を向くので、カメラは +Z 側から見る。
       const box = new THREE.Box3().setFromObject(root);
       const center = box.getCenter(new THREE.Vector3());

@@ -20,7 +20,7 @@ public static class WebGLDemoBuilder
         );
 
         PlayerSettings.productName = "ASV Unity WebGL Demo";
-        PlayerSettings.companyName = "olumo";
+        PlayerSettings.companyName = "Orqest";
         PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
         PlayerSettings.WebGL.decompressionFallback = true;
         PlayerSettings.WebGL.template = "APPLICATION:Default";

@@ -691,7 +691,7 @@ function App() {
       <header className="header">
         <h1 style={{ color: particleColor }}>Agent State Visualizer</h1>
         <p className="subtitle" style={{ color: particleColor, opacity: 0.7 }}>
-          can be used with the olumo app
+          can be used with the Orqest app
         </p>
       </header>
 
