@@ -117,6 +117,15 @@ export const TRANSITION_EASINGS = {
   mutedToListening: easeInOutCubic,
   mutedToThinking: easeInOutCubic,
   mutedToSpeaking: easeInOutCubic,
+  // idle（AI待機）の出入り
+  idleToListening: easeInOutCubic,
+  idleToThinking: easeInOutCubic,
+  idleToSpeaking: easeInOutCubic,
+  idleToMuted: easeInOutCubic,
+  listeningToIdle: easeInOutCubic,
+  thinkingToIdle: easeInOutCubic,
+  speakingToIdle: easeInOutCubic,
+  mutedToIdle: easeInOutCubic,
 } as const;
 
 export const getTransitionEasing = (

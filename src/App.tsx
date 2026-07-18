@@ -10,6 +10,8 @@ import './index.css';
 const toVisualizerState = (state: LoggedState): VisualizerState => {
   switch (state) {
     case 'idle':
+      // AI待機（ユーザー発話待ち）。listening（ユーザー発話中）と区別する。
+      return 'idle';
     case 'listening':
       return 'listening';
     case 'processing':
@@ -19,7 +21,7 @@ const toVisualizerState = (state: LoggedState): VisualizerState => {
     case 'muted':
       return 'muted';
     default:
-      return 'listening';
+      return 'idle';
   }
 };
 
@@ -546,7 +548,7 @@ function App() {
   useEffect(() => {
     if (!isAutoDemo) return;
 
-    const states: VisualizerState[] = ['listening', 'thinking', 'speaking', 'muted'];
+    const states: VisualizerState[] = ['idle', 'listening', 'thinking', 'speaking', 'muted'];
     const stateCount = states.length;
     const totalStates = stateCount * 1; // 1周分
     let currentIndex = 0;

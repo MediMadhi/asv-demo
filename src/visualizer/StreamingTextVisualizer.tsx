@@ -116,6 +116,7 @@ export const StreamingTextVisualizer: React.FC<StreamingTextVisualizerProps> = (
   // 状態表示テキスト
   const getStatusText = () => {
     switch (state) {
+      case 'idle': return 'Idle';
       case 'listening': return 'Listening...';
       case 'thinking': return 'Thinking...';
       case 'speaking': return 'Speaking...';

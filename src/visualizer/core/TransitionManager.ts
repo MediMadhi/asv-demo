@@ -10,9 +10,10 @@ import type {
   TransitionConfig,
   AudioFeatures,
 } from './types';
-import { DEFAULT_TRANSITION_CONFIG, DEFAULT_LISTENING_CONFIG, DEFAULT_THINKING_CONFIG, DEFAULT_SPEAKING_CONFIG, DEFAULT_MUTED_CONFIG } from './types';
+import { DEFAULT_TRANSITION_CONFIG, DEFAULT_IDLE_CONFIG, DEFAULT_LISTENING_CONFIG, DEFAULT_THINKING_CONFIG, DEFAULT_SPEAKING_CONFIG, DEFAULT_MUTED_CONFIG } from './types';
 import { ParticleSystem } from './ParticleSystem';
 import { TRANSITION_EASINGS, lerp } from './easing';
+import { IdleState } from '../states/IdleState';
 import { ListeningState } from '../states/ListeningState';
 import { ThinkingState } from '../states/ThinkingState';
 import { SpeakingState } from '../states/SpeakingState';
@@ -30,6 +31,7 @@ export class TransitionManager {
   private particleSize: number;
   private radiusDispersion: number;
 
+  private idleState: IdleState;
   private listeningState: ListeningState;
   private thinkingState: ThinkingState;
   private speakingState: SpeakingState;
@@ -64,6 +66,7 @@ export class TransitionManager {
       radiusDispersion: this.radiusDispersion,
     };
 
+    this.idleState = new IdleState(particleSystem, undefined, stateOptions);
     this.listeningState = new ListeningState(particleSystem, undefined, stateOptions);
     this.thinkingState = new ThinkingState(particleSystem, undefined, stateOptions);
     this.speakingState = new SpeakingState(particleSystem, undefined, stateOptions);
@@ -74,6 +77,7 @@ export class TransitionManager {
     this.centerX = width / 2;
     this.centerY = height / 2;
 
+    this.idleState.setDimensions(width, height);
     this.listeningState.setDimensions(width, height);
     this.thinkingState.setDimensions(width, height);
     this.speakingState.setDimensions(width, height);
@@ -98,6 +102,8 @@ export class TransitionManager {
 
   private getStateHandler(state: VisualizerState) {
     switch (state) {
+      case 'idle':
+        return this.idleState;
       case 'listening':
         return this.listeningState;
       case 'thinking':
@@ -111,6 +117,8 @@ export class TransitionManager {
 
   private getStateConfig(state: VisualizerState) {
     switch (state) {
+      case 'idle':
+        return DEFAULT_IDLE_CONFIG;
       case 'listening':
         return DEFAULT_LISTENING_CONFIG;
       case 'thinking':
@@ -181,6 +189,19 @@ export class TransitionManager {
     const particles = this.particleSystem.getParticles();
 
     switch (toState) {
+      case 'idle': {
+        const targets = this.idleState.getTargetPositions();
+        particles.forEach((p, i) => {
+          p.startX = p.x;
+          p.startY = p.y;
+          const target = targets[i % targets.length];
+          p.targetX = target.x;
+          p.targetY = target.y;
+          p.progress = 0;
+          p.delay = this.idleState.getStaggerDelay(p, i, this.centerX, this.centerY);
+        });
+        break;
+      }
       case 'listening': {
         const targets = this.listeningState.getTargetPositions();
         particles.forEach((p, i) => {
@@ -311,7 +332,12 @@ export class TransitionManager {
     return this.mutedState;
   }
 
+  getIdleState(): IdleState {
+    return this.idleState;
+  }
+
   dispose(): void {
+    this.idleState.exit();
     this.listeningState.exit();
     this.thinkingState.exit();
     this.speakingState.exit();

@@ -7,7 +7,7 @@
 
 // ===== 状態定義 =====
 
-export type VisualizerState = 'listening' | 'thinking' | 'speaking' | 'muted';
+export type VisualizerState = 'idle' | 'listening' | 'thinking' | 'speaking' | 'muted';
 
 export interface StateMachineContext {
   currentState: VisualizerState;
@@ -140,7 +140,10 @@ export interface MutedConfig {
   baseOpacity: number;
 }
 
-export type StateConfig = ListeningConfig | ThinkingConfig | SpeakingConfig | MutedConfig;
+// idle（AI待機・ユーザー発話待ち）。muted と同じ形状の設定を流用。
+export type IdleConfig = MutedConfig;
+
+export type StateConfig = ListeningConfig | ThinkingConfig | SpeakingConfig | MutedConfig | IdleConfig;
 
 export interface TransitionConfig {
   listeningToThinking: number;
@@ -151,6 +154,7 @@ export interface TransitionConfig {
 }
 
 export interface VisualizerConfig {
+  idle: IdleConfig;
   listening: ListeningConfig;
   thinking: ThinkingConfig;
   speaking: SpeakingConfig;
@@ -199,6 +203,13 @@ export const DEFAULT_MUTED_CONFIG: MutedConfig = {
   baseOpacity: 0.4,
 };
 
+export const DEFAULT_IDLE_CONFIG: IdleConfig = {
+  baseRadius: 60,
+  pulseSpeed: 0.6,
+  pulseAmount: 0.03,
+  baseOpacity: 0.5,
+};
+
 export const DEFAULT_TRANSITION_CONFIG: TransitionConfig = {
   listeningToThinking: 500,
   thinkingToSpeaking: 600,
@@ -208,6 +219,7 @@ export const DEFAULT_TRANSITION_CONFIG: TransitionConfig = {
 };
 
 export const DEFAULT_VISUALIZER_CONFIG: VisualizerConfig = {
+  idle: DEFAULT_IDLE_CONFIG,
   listening: DEFAULT_LISTENING_CONFIG,
   thinking: DEFAULT_THINKING_CONFIG,
   speaking: DEFAULT_SPEAKING_CONFIG,
