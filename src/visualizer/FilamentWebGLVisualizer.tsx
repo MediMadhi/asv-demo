@@ -88,12 +88,19 @@ const CUBE_INDICES = new Uint16Array([
 ]);
 
 const FACE_SHADES = [0.95, 0.70, 0.60, 0.80, 1.00, 0.50];
-const CUBE_COLORS = new Uint32Array(24);
-FACE_SHADES.forEach((shade, face) => {
-  const byte = Math.round(shade * 255);
-  const packed = (0xff000000 | (byte << 16) | (byte << 8) | byte) >>> 0;
-  CUBE_COLORS.fill(packed, face * 4, face * 4 + 4);
-});
+// Strong diagonal-key-light look used only for the black cube on a light background.
+const LIGHT_MODE_FACE_SHADES = [1.00, 0.32, 0.16, 0.58, 0.82, 0.08];
+const makeCubeColors = (faceShades: number[]) => {
+  const colors = new Uint32Array(24);
+  faceShades.forEach((shade, face) => {
+    const byte = Math.round(shade * 255);
+    const packed = (0xff000000 | (byte << 16) | (byte << 8) | byte) >>> 0;
+    colors.fill(packed, face * 4, face * 4 + 4);
+  });
+  return colors;
+};
+const CUBE_COLORS = makeCubeColors(FACE_SHADES);
+const LIGHT_MODE_CUBE_COLORS = makeCubeColors(LIGHT_MODE_FACE_SHADES);
 
 const parseHexColor = (value: string): [number, number, number] => {
   const match = /^#([0-9a-f]{6})$/iu.exec(value);
@@ -102,19 +109,26 @@ const parseHexColor = (value: string): [number, number, number] => {
   return [((packed >> 16) & 0xff) / 255, ((packed >> 8) & 0xff) / 255, (packed & 0xff) / 255];
 };
 
+const colorLuminance = ([r, g, b]: [number, number, number]) => r * 0.2126 + g * 0.7152 + b * 0.0722;
+
 const cubeBaseColor = (
   accent: [number, number, number],
   background: [number, number, number],
 ): [number, number, number] => {
-  const luminance = ([r, g, b]: [number, number, number]) => r * 0.2126 + g * 0.7152 + b * 0.0722;
-
   // Pure black multiplied by the per-face shade remains black on every face.
   // Lift only the light-theme black cube to a dark neutral so its existing
   // face shades become visible. The white cube in dark mode is unchanged.
-  if (luminance(background) > 0.75 && luminance(accent) < 0.08) {
-    return [0.26, 0.26, 0.26];
+  if (colorLuminance(background) > 0.75 && colorLuminance(accent) < 0.08) {
+    return [0.42, 0.42, 0.42];
   }
   return accent;
+};
+
+const usesLightModeCubeShades = (
+  accent: [number, number, number],
+  background: [number, number, number],
+) => {
+  return colorLuminance(background) > 0.75 && colorLuminance(accent) < 0.08;
 };
 
 interface MotionRuntime {
@@ -215,6 +229,7 @@ export const FilamentWebGLVisualizer: React.FC<FilamentWebGLVisualizerProps> = (
         const scaleVector = new Vector3(1, 1, 1);
         let viewportWidth = 0;
         let viewportHeight = 0;
+        let usingLightModeCubeShades = false;
 
         const render = (frameTimeMs: number) => {
           if (disposed) return;
@@ -287,6 +302,15 @@ export const FilamentWebGLVisualizer: React.FC<FilamentWebGLVisualizerProps> = (
 
           const accent = parseHexColor(input.color);
           const background = parseHexColor(input.backgroundColor);
+          const nextLightModeCubeShades = usesLightModeCubeShades(accent, background);
+          if (usingLightModeCubeShades !== nextLightModeCubeShades) {
+            usingLightModeCubeShades = nextLightModeCubeShades;
+            vertexBuffer.setBufferAt(
+              engine,
+              1,
+              usingLightModeCubeShades ? LIGHT_MODE_CUBE_COLORS : CUBE_COLORS,
+            );
+          }
           materialInstance.setColor3Parameter(
             'baseColor',
             filament.RgbType.sRGB,
