@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ParticleVisualizerWeb, StreamingTextVisualizer, FilamentWebGLVisualizer, FaceAvatarVisualizer, ColorfulBlobsVisualizer, OrqestShaderVisualizer, AboveTheCloudsVisualizer } from './visualizer';
+import { ParticleVisualizerWeb, StreamingTextVisualizer, FilamentWebGLVisualizer, FaceAvatarVisualizer, ColorfulBlobsVisualizer, OrqestShaderVisualizer, AboveTheCloudsVisualizer, FlowFieldVisualizerWeb } from './visualizer';
 import type { VisualizerState } from './visualizer';
 import { usePlayback } from './playback';
 import type { LoggedState } from './playback';
@@ -743,8 +743,11 @@ function App() {
           {selectedVisualizer === 'above-clouds' && (
             <AboveTheCloudsVisualizer width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
           )}
-          {(['luminous-mist', 'liquid-earth', 'molten', 'apparition'] as const).includes(selectedVisualizer as any) && (
-            <OrqestShaderVisualizer kind={selectedVisualizer as 'luminous-mist' | 'liquid-earth' | 'molten' | 'apparition'} width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
+          {(['luminous-mist', 'liquid-earth', 'molten'] as const).includes(selectedVisualizer as any) && (
+            <FlowFieldVisualizerWeb kind={selectedVisualizer as 'luminous-mist' | 'liquid-earth' | 'molten'} width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
+          )}
+          {selectedVisualizer === 'apparition' && (
+            <OrqestShaderVisualizer kind="apparition" width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
           )}
           {selectedVisualizer === 'text' && (
             <StreamingTextVisualizer

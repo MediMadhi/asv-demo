@@ -10,6 +10,7 @@ export { FaceAvatarVisualizer } from './FaceAvatarVisualizer';
 export { ColorfulBlobsVisualizer } from './ColorfulBlobsVisualizer';
 export { OrqestShaderVisualizer } from './OrqestShaderVisualizer';
 export { AboveTheCloudsVisualizer } from './AboveTheCloudsVisualizer';
+export { FlowFieldVisualizerWeb } from './FlowFieldVisualizerWeb';
 
 // Core
 export * from './core/types';

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import type { VisualizerState } from './core/types';
 
-export type OrqestShaderKind = 'luminous-mist' | 'liquid-earth' | 'molten' | 'apparition';
+export type OrqestShaderKind = 'apparition';
 
 type Props = {
   kind: OrqestShaderKind;
@@ -68,12 +68,9 @@ void main(){
 
 type Palette = [string, string, string, string];
 const palettes: Record<OrqestShaderKind, Record<'light'|'dark', Palette>> = {
-  'luminous-mist': { light:['#ebf3ff','#5f97f4','#b2d3ff','#c4aaff'], dark:['#111b2f','#5da0ff','#97ddff','#b48fff'] },
-  'liquid-earth': { light:['#e6edf0','#397e91','#5fb7b0','#b2d59b'], dark:['#10242a','#3b8fa2','#62c6bb','#b1dd9a'] },
-  molten: { light:['#ded8d2','#eca870','#e6742c','#ffc460'], dark:['#1a1210','#803616','#e05c18','#ffba5c'] },
   apparition: { light:['#263454','#7e98c4','#5c7eb6','#2e3e60'], dark:['#101a2e','#b0d0f8','#80b6f0','#466aa8'] },
 };
-const variants: Record<OrqestShaderKind, number> = {'luminous-mist':1,'liquid-earth':2,molten:3,apparition:4};
+const variants: Record<OrqestShaderKind, number> = {apparition:4};
 const stateNumber: Record<VisualizerState, number> = {idle:0,listening:1,thinking:2,speaking:3,muted:-1};
 const rgb=(hex:string):[number,number,number]=>[parseInt(hex.slice(1,3),16)/255,parseInt(hex.slice(3,5),16)/255,parseInt(hex.slice(5,7),16)/255];
 
