@@ -7,6 +7,8 @@ export { ParticleVisualizerWeb } from './ParticleVisualizerWeb';
 export { StreamingTextVisualizer } from './StreamingTextVisualizer';
 export { FilamentWebGLVisualizer } from './FilamentWebGLVisualizer';
 export { FaceAvatarVisualizer } from './FaceAvatarVisualizer';
+export { ColorfulBlobsVisualizer } from './ColorfulBlobsVisualizer';
+export { OrqestShaderVisualizer } from './OrqestShaderVisualizer';
 
 // Core
 export * from './core/types';

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ParticleVisualizerWeb, StreamingTextVisualizer, FilamentWebGLVisualizer, FaceAvatarVisualizer } from './visualizer';
+import { ParticleVisualizerWeb, StreamingTextVisualizer, FilamentWebGLVisualizer, FaceAvatarVisualizer, ColorfulBlobsVisualizer, OrqestShaderVisualizer } from './visualizer';
 import type { VisualizerState } from './visualizer';
 import { usePlayback } from './playback';
 import type { LoggedState } from './playback';
@@ -26,7 +26,7 @@ const toVisualizerState = (state: LoggedState): VisualizerState => {
 };
 
 type ThemeMode = 'system' | 'light' | 'dark';
-type VisualizerType = 'particle' | 'text' | 'filament' | 'face' | 'waveform' | 'minimal';
+type VisualizerType = 'particle' | 'blobs' | 'above-clouds' | 'luminous-mist' | 'liquid-earth' | 'molten' | 'apparition' | 'filament' | 'face' | 'text';
 
 // ビジュアライザー情報
 interface VisualizerInfo {
@@ -39,11 +39,15 @@ interface VisualizerInfo {
 
 const VISUALIZERS: VisualizerInfo[] = [
   { id: 'particle', name: 'Orbital Particles', description: 'Orqest particle field with five reactive states (320 particles)', available: true, particleCount: 320 },
-  { id: 'text', name: 'Streaming Text', description: 'Dynamic text visualization with audio reactivity', available: true },
-  { id: 'filament', name: 'Filament WebGL', description: 'Orqest cube renderer recreated with Filament WebGL', available: true },
-  { id: 'face', name: '3D Face Avatar', description: 'three.js bust avatar with viseme lip-sync (face.glb)', available: true },
-  { id: 'waveform', name: 'Waveform', description: 'Audio waveform bars', available: false },
-  { id: 'minimal', name: 'Minimal', description: 'Simple dot indicator', available: false },
+  { id: 'blobs', name: 'Colorful Blobs', description: 'Soft color fields driven by voice and conversation state', available: true },
+  { id: 'above-clouds', name: 'Above the Clouds', description: 'Layered atmospheric clouds with audio-reactive motion', available: true },
+  { id: 'luminous-mist', name: 'Luminous Mist', description: 'Full-frame luminous flow field', available: true },
+  { id: 'liquid-earth', name: 'Liquid Earth', description: 'Organic liquid field contained in a circular stage', available: true },
+  { id: 'molten', name: 'Molten', description: 'Audio-reactive molten cracks and glowing crust', available: true },
+  { id: 'apparition', name: 'Apparition', description: 'A shader-rendered face emerging from mist', available: true },
+  { id: 'filament', name: 'Spinning Cube', description: 'Orqest cube renderer recreated with Filament WebGL', available: true },
+  { id: 'face', name: 'Avatar Beta', description: '3D bust avatar with viseme lip-sync (face.glb)', available: true },
+  { id: 'text', name: 'Streaming Text', description: 'Existing asv-demo text visualization', available: true },
 ];
 
 // システムのダークモード設定を取得
@@ -733,6 +737,12 @@ function App() {
               particleColor={particleColor}
             />
           )}
+          {selectedVisualizer === 'blobs' && (
+            <ColorfulBlobsVisualizer width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
+          )}
+          {(['above-clouds', 'luminous-mist', 'liquid-earth', 'molten', 'apparition'] as const).includes(selectedVisualizer as any) && (
+            <OrqestShaderVisualizer kind={selectedVisualizer as 'above-clouds' | 'luminous-mist' | 'liquid-earth' | 'molten' | 'apparition'} width={dimensions.width} height={dimensions.height} state={currentState} audioLevel={currentAudioLevel} zcr={currentZcr} rmsHigh={currentRmsHigh} backgroundColor={backgroundColor} />
+          )}
           {selectedVisualizer === 'text' && (
             <StreamingTextVisualizer
               audioLevel={currentAudioLevel}
@@ -767,36 +777,6 @@ function App() {
               rmsHigh={currentRmsHigh}
               state={currentState}
             />
-          )}
-          {selectedVisualizer === 'waveform' && (
-            <div
-              style={{
-                width: dimensions.width,
-                height: dimensions.height,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: particleColor,
-                opacity: 0.5,
-              }}
-            >
-              Waveform Visualizer (Coming Soon)
-            </div>
-          )}
-          {selectedVisualizer === 'minimal' && (
-            <div
-              style={{
-                width: dimensions.width,
-                height: dimensions.height,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: particleColor,
-                opacity: 0.5,
-              }}
-            >
-              Minimal Visualizer (Coming Soon)
-            </div>
           )}
           </div>
 
