@@ -44,7 +44,7 @@ const VISUALIZERS: VisualizerInfo[] = [
   { id: 'luminous-mist', name: 'Luminous Mist', description: 'Full-frame luminous flow field', available: true },
   { id: 'liquid-earth', name: 'Liquid Earth', description: 'Organic liquid field contained in a circular stage', available: true },
   { id: 'molten', name: 'Molten', description: 'Audio-reactive molten cracks and glowing crust', available: true },
-  { id: 'apparition', name: 'Apparition', description: 'A shader-rendered face emerging from mist', available: true },
+  { id: 'apparition', name: 'Apparition', description: 'A shader-rendered face emerging from mist', available: false },
   { id: 'filament', name: 'Spinning Cube', description: 'Orqest cube renderer recreated with Filament WebGL', available: true },
   { id: 'face', name: 'Avatar Beta', description: '3D bust avatar with viseme lip-sync (face.glb)', available: true },
   { id: 'text', name: 'Streaming Text', description: 'Existing asv-demo text visualization', available: true },
