@@ -102,6 +102,21 @@ const parseHexColor = (value: string): [number, number, number] => {
   return [((packed >> 16) & 0xff) / 255, ((packed >> 8) & 0xff) / 255, (packed & 0xff) / 255];
 };
 
+const cubeBaseColor = (
+  accent: [number, number, number],
+  background: [number, number, number],
+): [number, number, number] => {
+  const luminance = ([r, g, b]: [number, number, number]) => r * 0.2126 + g * 0.7152 + b * 0.0722;
+
+  // Pure black multiplied by the per-face shade remains black on every face.
+  // Lift only the light-theme black cube to a dark neutral so its existing
+  // face shades become visible. The white cube in dark mode is unchanged.
+  if (luminance(background) > 0.75 && luminance(accent) < 0.08) {
+    return [0.26, 0.26, 0.26];
+  }
+  return accent;
+};
+
 interface MotionRuntime {
   smoothedLevel: number;
   smoothedStateScale: number;
@@ -272,7 +287,11 @@ export const FilamentWebGLVisualizer: React.FC<FilamentWebGLVisualizerProps> = (
 
           const accent = parseHexColor(input.color);
           const background = parseHexColor(input.backgroundColor);
-          materialInstance.setColor3Parameter('baseColor', filament.RgbType.sRGB, accent);
+          materialInstance.setColor3Parameter(
+            'baseColor',
+            filament.RgbType.sRGB,
+            cubeBaseColor(accent, background),
+          );
           materialInstance.setFloatParameter('audioLevel', motion.smoothedLevel);
           materialInstance.setFloatParameter('gradientAmount', motion.smoothedGradient);
           renderer.setClearOptions({ clearColor: [...background, 1], clear: true });
