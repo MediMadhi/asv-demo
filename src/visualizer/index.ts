@@ -5,7 +5,7 @@
 // Main components
 export { ParticleVisualizerWeb } from './ParticleVisualizerWeb';
 export { StreamingTextVisualizer } from './StreamingTextVisualizer';
-export { UnityWebGLFrame } from './UnityWebGLFrame';
+export { FilamentWebGLVisualizer } from './FilamentWebGLVisualizer';
 export { FaceAvatarVisualizer } from './FaceAvatarVisualizer';
 
 // Core

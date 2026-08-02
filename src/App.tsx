@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ParticleVisualizerWeb, StreamingTextVisualizer, UnityWebGLFrame, FaceAvatarVisualizer } from './visualizer';
+import { ParticleVisualizerWeb, StreamingTextVisualizer, FilamentWebGLVisualizer, FaceAvatarVisualizer } from './visualizer';
 import type { VisualizerState } from './visualizer';
 import { usePlayback } from './playback';
 import type { LoggedState } from './playback';
@@ -26,7 +26,7 @@ const toVisualizerState = (state: LoggedState): VisualizerState => {
 };
 
 type ThemeMode = 'system' | 'light' | 'dark';
-type VisualizerType = 'particle' | 'text' | 'unity' | 'face' | 'waveform' | 'minimal';
+type VisualizerType = 'particle' | 'text' | 'filament' | 'face' | 'waveform' | 'minimal';
 
 // ビジュアライザー情報
 interface VisualizerInfo {
@@ -40,7 +40,7 @@ interface VisualizerInfo {
 const VISUALIZERS: VisualizerInfo[] = [
   { id: 'particle', name: 'Orbital Particles', description: 'Orqest particle field with five reactive states (320 particles)', available: true, particleCount: 320 },
   { id: 'text', name: 'Streaming Text', description: 'Dynamic text visualization with audio reactivity', available: true },
-  { id: 'unity', name: 'Unity WebGL', description: 'Embedded Unity WebGL demo scene', available: true },
+  { id: 'filament', name: 'Filament WebGL', description: 'Orqest cube renderer recreated with Filament WebGL', available: true },
   { id: 'face', name: '3D Face Avatar', description: 'three.js bust avatar with viseme lip-sync (face.glb)', available: true },
   { id: 'waveform', name: 'Waveform', description: 'Audio waveform bars', available: false },
   { id: 'minimal', name: 'Minimal', description: 'Simple dot indicator', available: false },
@@ -745,8 +745,8 @@ function App() {
               color={particleColor}
             />
           )}
-          {selectedVisualizer === 'unity' && (
-            <UnityWebGLFrame
+          {selectedVisualizer === 'filament' && (
+            <FilamentWebGLVisualizer
               width={dimensions.width}
               height={dimensions.height}
               color={particleColor}

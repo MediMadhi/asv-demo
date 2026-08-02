@@ -1,0 +1,25 @@
+material {
+    name : filamentAvatar,
+    shadingModel : unlit,
+    parameters : [
+        { type : float3, name : baseColor },
+        { type : float3, name : voiceColor },
+        { type : float, name : audioLevel },
+        { type : float, name : gradientAmount }
+    ],
+    requires : [
+        position,
+        color
+    ]
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        float shade = getColor().r;
+        float strength = clamp(materialParams.audioLevel * 40.0, 0.0, 1.0)
+            * materialParams.gradientAmount;
+        float3 color = mix(materialParams.baseColor, materialParams.voiceColor, strength);
+        material.baseColor.rgb = color * shade + materialParams.voiceColor * strength * 0.3;
+    }
+}
