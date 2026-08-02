@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ParticleVisualizerWeb, FloatingParticlesVisualizer, StreamingTextVisualizer, UnityWebGLFrame, FaceAvatarVisualizer } from './visualizer';
+import { ParticleVisualizerWeb, StreamingTextVisualizer, UnityWebGLFrame, FaceAvatarVisualizer } from './visualizer';
 import type { VisualizerState } from './visualizer';
 import { usePlayback } from './playback';
 import type { LoggedState } from './playback';
@@ -26,7 +26,7 @@ const toVisualizerState = (state: LoggedState): VisualizerState => {
 };
 
 type ThemeMode = 'system' | 'light' | 'dark';
-type VisualizerType = 'particle' | 'floating' | 'text' | 'unity' | 'face' | 'waveform' | 'minimal';
+type VisualizerType = 'particle' | 'text' | 'unity' | 'face' | 'waveform' | 'minimal';
 
 // ビジュアライザー情報
 interface VisualizerInfo {
@@ -38,8 +38,7 @@ interface VisualizerInfo {
 }
 
 const VISUALIZERS: VisualizerInfo[] = [
-  { id: 'particle', name: 'Orbital Particles', description: 'Particles orbiting in circular formation (40 particles)', available: true, particleCount: 40 },
-  { id: 'floating', name: 'Circular Particle Field', description: 'Rich floating particles with dispersion (500 particles)', available: true, particleCount: 500 },
+  { id: 'particle', name: 'Orbital Particles', description: 'Orqest particle field with five reactive states (320 particles)', available: true, particleCount: 320 },
   { id: 'text', name: 'Streaming Text', description: 'Dynamic text visualization with audio reactivity', available: true },
   { id: 'unity', name: 'Unity WebGL', description: 'Embedded Unity WebGL demo scene', available: true },
   { id: 'face', name: '3D Face Avatar', description: 'three.js bust avatar with viseme lip-sync (face.glb)', available: true },
@@ -732,24 +731,6 @@ function App() {
               width={dimensions.width}
               height={dimensions.height}
               particleColor={particleColor}
-            />
-          )}
-          {selectedVisualizer === 'floating' && (
-            <FloatingParticlesVisualizer
-              audioLevel={currentAudioLevel}
-              zcr={currentZcr}
-              rmsHigh={currentRmsHigh}
-              state={currentState}
-              transcript={!isAutoDemo ? playback.aiTranscript : undefined}
-              userTranscript={!isAutoDemo ? playback.userTranscript : undefined}
-              showCaption={showCaptions}
-              width={dimensions.width}
-              height={dimensions.height}
-              particleColor={particleColor}
-              particleCount={500}
-              particleSize={1}
-              radiusDispersion={0.3}
-              debug={false}
             />
           )}
           {selectedVisualizer === 'text' && (
