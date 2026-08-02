@@ -47,7 +47,7 @@ const VISUALIZERS: VisualizerInfo[] = [
   { id: 'apparition', name: 'Apparition', description: 'A shader-rendered face emerging from mist', available: false },
   { id: 'filament', name: 'Spinning Cube', description: 'Orqest cube renderer recreated with Filament WebGL', available: true },
   { id: 'face', name: 'Avatar Beta', description: '3D bust avatar with viseme lip-sync (face.glb)', available: true },
-  { id: 'text', name: 'Streaming Text', description: 'Existing asv-demo text visualization', available: true },
+  { id: 'text', name: 'Streaming Text', description: 'Existing asv-demo text visualization', available: false },
 ];
 
 // システムのダークモード設定を取得
