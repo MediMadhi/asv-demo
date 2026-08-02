@@ -352,22 +352,6 @@ export const FilamentWebGLVisualizer: React.FC<FilamentWebGLVisualizerProps> = (
           {status === 'error' ? 'Filament WebGL unavailable' : 'Loading Filament…'}
         </div>
       )}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          left: 12,
-          bottom: 10,
-          color,
-          fontSize: 10,
-          letterSpacing: '0.08em',
-          opacity: 0.45,
-          pointerEvents: 'none',
-          textTransform: 'uppercase',
-        }}
-      >
-        Filament WebGL
-      </div>
     </div>
   );
 };
