@@ -258,6 +258,7 @@ const calculateVisualizerSize = (): { width: number; height: number } => {
 
 // Auto Demo用の特別なパターンID
 const AUTO_DEMO_ID = '__auto_demo__';
+const CAPTIONS_CONTROL_VISIBLE = false;
 
 function App() {
   // Auto Demo用の状態
@@ -394,7 +395,7 @@ function App() {
   const [showPatternMenu, setShowPatternMenu] = useState(false);
 
   // キャプション表示
-  const [showCaptions, setShowCaptions] = useState(true);
+  const [showCaptions, setShowCaptions] = useState(false);
 
   // ミュート状態（デフォルトでミュート）
   const [isMuted, setIsMuted] = useState(true);
@@ -1079,27 +1080,28 @@ function App() {
               )}
             </button>
 
-            {/* 字幕 */}
-            <button
-              onClick={() => setShowCaptions(!showCaptions)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.1rem',
-                opacity: showCaptions ? 1 : 0.5,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              title={showCaptions ? 'Hide subtitles' : 'Show subtitles'}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={particleColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                <line x1="7" y1="8" x2="17" y2="8" />
-                <line x1="7" y1="12" x2="13" y2="12" />
-              </svg>
-            </button>
+            {CAPTIONS_CONTROL_VISIBLE && (
+              <button
+                onClick={() => setShowCaptions(!showCaptions)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '0.1rem',
+                  opacity: showCaptions ? 1 : 0.5,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                title={showCaptions ? 'Hide subtitles' : 'Show subtitles'}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={particleColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <line x1="7" y1="8" x2="17" y2="8" />
+                  <line x1="7" y1="12" x2="13" y2="12" />
+                </svg>
+              </button>
+            )}
 
             {/* テーマ切り替え（システム/ライト/ダーク循環） */}
             <button
